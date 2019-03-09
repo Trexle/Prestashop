@@ -30,7 +30,7 @@ define('TREXLE_CURRENCY_DEFAULT',	'USD');
 /**
  * trexleapi
  *
- * This class handles Pin Payment transactions
+ * This class handles Trexle transactions
  *
  * It supports the following tranactions:
  * 		Credit Payment (standard)
@@ -39,8 +39,8 @@ define('TREXLE_CURRENCY_DEFAULT',	'USD');
  *
  *
  * @param int mode - The kind of transaction object you would like to open. i.e. TREXLE_MODE_TEST 
- * @param string merchantID - The merchant's Secure Key, received from Pin Payments
- * @param string merchantPW - The merchant's Publishable Key, received from Pin Payments
+ * @param string merchantID - The merchant's Secure Key, received from Trexle
+ * @param string merchantPW - The merchant's Publishable Key, received from Trexle
  * @param string identifier - Support identifier
  *
  * @notes
