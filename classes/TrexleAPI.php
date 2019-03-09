@@ -15,7 +15,7 @@ define('TREXLE_MODE_TEST',			 0);
 define('TREXLE_MODE_LIVE',			 1);
 
 /* Server URLs */
-define('TREXLE_URL_TEST', 			'https://sanbox.trexle.com');
+define('TREXLE_URL_TEST', 			'https://sandbox.trexle.com');
 define('TREXLE_URL_LIVE', 			'https://core.trexle.com');
 
 /* Transaction types. */
@@ -25,7 +25,7 @@ define('TREXLE_TXN_PREAUTH', 		 10);
 define('TREXLE_TXN_CAPTURE', 		 15);
 
 /* Currencies */
-define('TREXLE_CURRENCY_DEFAULT',	'AUD');
+define('TREXLE_CURRENCY_DEFAULT',	'USD');
 
 /**
  * trexleapi
@@ -367,7 +367,7 @@ class trexle_transaction
 		{
 			// log error; 
 			if ($this->getDebug()) 
-				Pinpayments::log( "Error missing transaction id: ".$transaction_id );
+				Trexle::log( "Error missing transaction id: ".$transaction_id );
             return false; 
         }
 		
@@ -384,19 +384,19 @@ class trexle_transaction
 		$response = $this->sendRequestPost($this->endPointUrl . '/api/v1/charges'. $transaction_id .'/refunds', $fields);
 		
 		//if ($this->getDebug()) 
-		//	Pinpayments::log( $this->getTxnReference(). ' Response: ' . print_r( $response, true ) );
+			Trexle::log( $this->getTxnReference(). ' Response: ' . print_r( $response, true ) );
 	
 		//Remove the request from memory
 		unset($fields);
 		
 		if(	!empty($response['response']['status_message']) && $response['response']['status_message'] == 'Pending' ) { 
 			if ($this->getDebug()) 
-			  Pinpayments::log( "Refund Successful. Refund ID: ".$response['response']['token'] );
+			  Trexle::log( "Refund Successful. Refund ID: ".$response['response']['token'] );
 			return $response['response']['token'];
 		} 
 		else { // log error	
 			if ($this->getDebug()) 
-				Pinpayments::log("Error Refunding Order ID: ".$order_id. " Error Description: ".$response['error_description']);
+				Trexle::log("Error Refunding Order ID: ".$order_id. " Error Description: ".$response['error_description']);
 			    return false;
 		} 
 		
@@ -448,7 +448,7 @@ class trexle_transaction
 		{
 			// log error; 
 			if ($this->getDebug()) 
-				Pinpayments::log( "Error missing transaction id: ".$transaction_id );
+				Trexle::log( "Error missing transaction id: ".$transaction_id );
             return false; 
         }
 			
@@ -463,16 +463,16 @@ class trexle_transaction
 		
 		if ($this->getDebug()) 
 		{ 
-				//Pinpayments::log( "Here in processCaptur function. Fields: ".print_r($fields, true) );
-				Pinpayments::log( "Amount: ".$amt );
-				Pinpayments::log( "Curency: ".$currency );
+				//Trexle::log( "Here in processCaptur function. Fields: ".print_r($fields, true) );
+				Trexle::log( "Amount: ".$amt );
+				Trexle::log( "Curency: ".$currency );
 		} 
 		
 		//Send capture request
 		$response = $this->sendRequestPut($this->endPointUrl . '/api/v1/charges'. $transaction_id .'/capture', $fields);
 		
 		//if ($this->getDebug()) 
-		//	Pinpayments::log(' Capture Response: ' . print_r( $response, true ) );
+			Trexle::log(' Capture Response: ' . print_r( $response, true ) );
 	
 		//Remove the request from memory
 		unset($fields);
@@ -480,12 +480,12 @@ class trexle_transaction
 		if(	!empty($response['response']['success']) && $response['response']['success'] == 1 )
 		{ 
 			//if ($this->getDebug()) 
-			//  Pinpayments::log( "Capture Successful. Capture ID: ".$response['response']['token'] );
+			//  Trexle::log( "Capture Successful. Capture ID: ".$response['response']['token'] );
 			return $response['response']['token'];
 		} 
 		else { // log error	
 			if ($this->getDebug()) 
-				Pinpayments::log("Error Capturing payment for order id: ".$order_id. " Error Description: ".$response['error_description']);
+				Trexle::log("Error Capturing payment for order id: ".$order_id. " Error Description: ".$response['error_description']);
 			    return false;
 		} 
 		
@@ -502,7 +502,7 @@ class trexle_transaction
 	{
 		if ($this->getDebug()) 
 		{ 
-			Pinpayments::log( "here in api processTransaction 1 " );
+			Trexle::log( "here in api processTransaction 1 " );
 		} 
 		
 		//Check for trexle validity
@@ -555,8 +555,8 @@ class trexle_transaction
 		
 		if ($this->getDebug()) 
 		{ 
-			//Pinpayments::log( $this->getTxnReference(). ' Fields: ' . print_r( $fields, true ) );
-			Pinpayments::log( $this->getTxnReference(). ' End point URL: ' . $this->endPointUrl . '/1/charges');
+			//Trexle::log( $this->getTxnReference(). ' Fields: ' . print_r( $fields, true ) );
+			Trexle::log( $this->getTxnReference(). ' End point URL: ' . $this->endPointUrl . '/1/charges');
 		} 
 		
 		//Send request
@@ -569,7 +569,7 @@ class trexle_transaction
 		if(	!empty($response['response']['success']) && $response['response']['success'] == 1 ) { 
     	if ($this->getDebug()) 
 		   { 			
-			    Pinpayments::log('Payment Successful');
+			    Trexle::log('Payment Successful');
 		   } 
 				 return array(
 						'success' => 'yes',
@@ -578,7 +578,7 @@ class trexle_transaction
 		else	 { 
      	if ($this->getDebug()) 
 		    { 
-			     Pinpayments::log('Payment_error: '.$response['messages'][0]['message']);
+			     Trexle::log('Payment_error: '.$response['messages'][0]['message']);
 		    } 
     
 			  return array(
@@ -717,8 +717,8 @@ class trexle_transaction
 		
 		if ($this->getDebug()) 
 		{
-			Pinpayments::log( $this->getTxnReference().' End point URL: ' . $postURL  );
-			//Pinpayments::log( $this->getTxnReference().' Fields: ' . print_r( $fields, true ) );
+			Trexle::log( $this->getTxnReference().' End point URL: ' . $postURL  );
+			//Trexle::log( $this->getTxnReference().' Fields: ' . print_r( $fields, true ) );
 		}
 		
 		curl_setopt($ch, CURLOPT_USERPWD, $this->privateKey . ":" . $this->publishableKey );
@@ -747,8 +747,8 @@ class trexle_transaction
 		
 		if ($this->getDebug()) 
 		{
-			Pinpayments::log( $this->getTxnReference().' End point URL: ' . $postURL  );
-			//Pinpayments::log( $this->getTxnReference().' Fields: ' . print_r( $fields, true ) );
+			Trexle::log( $this->getTxnReference().' End point URL: ' . $postURL  );
+			Trexle::log( $this->getTxnReference().' Fields: ' . print_r( $fields, true ) );
 		}
 		
 		curl_setopt($ch, CURLOPT_USERPWD, $this->privateKey . ":" . $this->publishableKey );
