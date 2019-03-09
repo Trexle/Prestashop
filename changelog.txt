@@ -1,1 +1,2 @@
+v 1.0.1 03/10/2019 - Fix a couple of bugs where customers return after payment to a blank page.
 v 1.0.0 09/01/2018 - Initial Release
