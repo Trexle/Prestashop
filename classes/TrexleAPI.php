@@ -463,7 +463,7 @@ class trexle_transaction
 		
 		if ($this->getDebug()) 
 		{ 
-				//Trexle::log( "Here in processCaptur function. Fields: ".print_r($fields, true) );
+				Trexle::log( "Here in processCaptur function. Fields: ".print_r($fields, true) );
 				Trexle::log( "Amount: ".$amt );
 				Trexle::log( "Curency: ".$currency );
 		} 
@@ -555,7 +555,7 @@ class trexle_transaction
 		
 		if ($this->getDebug()) 
 		{ 
-			//Trexle::log( $this->getTxnReference(). ' Fields: ' . print_r( $fields, true ) );
+			Trexle::log( $this->getTxnReference(). ' Fields: ' . print_r( $fields, true ) );
 			Trexle::log( $this->getTxnReference(). ' End point URL: ' . $this->endPointUrl . '/1/charges');
 		} 
 		
@@ -718,7 +718,7 @@ class trexle_transaction
 		if ($this->getDebug()) 
 		{
 			Trexle::log( $this->getTxnReference().' End point URL: ' . $postURL  );
-			//Trexle::log( $this->getTxnReference().' Fields: ' . print_r( $fields, true ) );
+			Trexle::log( $this->getTxnReference().' Fields: ' . print_r( $fields, true ) );
 		}
 		
 		curl_setopt($ch, CURLOPT_USERPWD, $this->privateKey . ":" . $this->publishableKey );
