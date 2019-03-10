@@ -520,13 +520,13 @@ class Trexle extends PaymentModule
 		{
 			$this->_html .= '<div class="panel">
 			<fieldset style="width:400px;">
-				<legend><img src="'._MODULE_DIR_.$this->name.'/logo.png" alt="" /> '.$this->l('Pin Payments Refund').'</legend>
+				<legend><img src="'._MODULE_DIR_.$this->name.'/logo.png" alt="" /> '.$this->l('Trexle Refund').'</legend>
 				<form method="post" action="'.htmlentities($_SERVER['REQUEST_URI']).'">
 					<input type="hidden" name="id_order" value="'.(int)$params['id_order'].'" />';
 					$order = new Order((int)$params['id_order']);
 					$total_paid = $order->total_paid;
 					$this->_html .= '<p class="center">Total Refund Amount: $'.$total_paid.'</p>
-						<p class="center"><input type="submit" class="button" name="submitPinPaymentsRefund" value="'.$this->l('Refund total transaction : $'.$total_paid).'" onclick="if (!confirm(\''.$this->l('Are you sure you want to refund transaction?').'\'))return false;" /></p>';
+						<p class="center"><input type="submit" class="button" name="submitTrexleRefund" value="'.$this->l('Refund total transaction : $'.$total_paid).'" onclick="if (!confirm(\''.$this->l('Are you sure you want to refund transaction?').'\'))return false;" /></p>';
 			$this->_html .= '</form>';
 			$this->postRefundProcess();
 			$this->_html .= '</fieldset></div>';
@@ -536,13 +536,13 @@ class Trexle extends PaymentModule
 		{
 			$this->_html .= '<div class="panel">
 			<fieldset style="width:400px;">
-				<legend><img src="'._MODULE_DIR_.$this->name.'/logo.png" alt="" /> '.$this->l('Pin Payments Capture').'</legend>
+				<legend><img src="'._MODULE_DIR_.$this->name.'/logo.png" alt="" /> '.$this->l('Trexle Capture').'</legend>
 				<form method="post" action="'.htmlentities($_SERVER['REQUEST_URI']).'">
 					<input type="hidden" name="id_order" value="'.(int)$params['id_order'].'" />';
 					$order = new Order((int)$params['id_order']);
 					$total_paid = $order->total_paid;
 					$this->_html .= '<p class="center">Capture Amount: $'.$total_paid.'</p>
-						<p class="center"><input type="submit" class="button" name="submitPinPaymentsCapture" value="'.$this->l('Capture total transaction : $'.$total_paid).'" onclick="if (!confirm(\''.$this->l('Are you sure your want to capture transaction?').'\'))return false;" /></p>';
+						<p class="center"><input type="submit" class="button" name="submitTrexleCapture" value="'.$this->l('Capture total transaction : $'.$total_paid).'" onclick="if (!confirm(\''.$this->l('Are you sure your want to capture transaction?').'\'))return false;" /></p>';
 			$this->_html .= '</form>';
 			$this->postCaptureProcess();
 			$this->_html .= '</fieldset></div>';
@@ -553,7 +553,7 @@ class Trexle extends PaymentModule
 
 	private function postRefundProcess()
 	{
-		if (Tools::isSubmit('submitPinPaymentsRefund'))
+		if (Tools::isSubmit('submitTrexleRefund'))
 		{
 			require_once('classes/trexleapi.php');
 			$id_order = Tools::getValue('id_order');
@@ -641,7 +641,7 @@ class Trexle extends PaymentModule
 
 	private function postCaptureProcess()
 	{
-		if (Tools::isSubmit('submitPinPaymentsCapture'))
+		if (Tools::isSubmit('submitTrexleCapture'))
 		{
 			require_once('classes/trexleapi.php');
 			$id_order = Tools::getValue('id_order');
