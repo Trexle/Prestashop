@@ -37,7 +37,7 @@ class Trexle extends PaymentModule
     {
         $this->name = 'trexle';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.0';
+        $this->version = '1.0.3';
         $this->author = 'Trexle';
         $this->need_instance = 0;
 
