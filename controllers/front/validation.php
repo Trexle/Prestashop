@@ -161,11 +161,11 @@ class TrexleValidationModuleFrontController extends ModuleFrontController
 				
 				$this->module->validateOrder($cart->id, $order_status, $total, $this->module->l('Trexle'), $message, array('transaction_id' => $result['transactionid']), (int)$this->context->currency->id, false, $customer->secure_key);
 
-				//Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key);
+				Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key);
 			
-				$url_redirect = $this->redirectUrl('index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key);
+				//$url_redirect = $this->redirectUrl('index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key);
 		
-				die(Tools::jsonEncode(array('msg' => $url_redirect, 'err' => 0)));	 
+				//die(Tools::jsonEncode(array('msg' => $url_redirect, 'err' => 0)));	 
 	
 				
 			}

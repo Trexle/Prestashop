@@ -404,8 +404,8 @@ class Trexle extends PaymentModule
         $currency_id = $params['cart']->id_currency;
         $currency = new Currency((int)$currency_id);
 
-        if (in_array($currency->iso_code, $this->limited_currencies) == false)
-            return false;
+        //if (in_array($currency->iso_code, $this->limited_currencies) == false)
+        //    return false;
 
         $this->smarty->assign('module_dir', $this->_path);
 
